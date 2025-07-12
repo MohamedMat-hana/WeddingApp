@@ -8,9 +8,8 @@ function App() {
   const [attending, setAttending] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const payload = { name, email, attending };
+  const handleSubmit = async () => {
+     const payload = { name, email, attending };
     console.log('Sending payload:', payload); // Debug log
     try {
       const response = await fetch('http://localhost:5000/api/rsvp', {
