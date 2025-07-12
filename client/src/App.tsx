@@ -1,33 +1,39 @@
-import { useState } from 'react';
-import Countdown from 'react-countdown';
-import './index.css';
+import { useState } from "react";
+import Countdown from "react-countdown";
+import "./index.css";
 
 function App() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [attending, setAttending] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [attending, setAttending] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = async () => {
-     const payload = { name, email, attending };
-    console.log('Sending payload:', payload); // Debug log
-    try {
-const response = await fetch('https://wedding-invitation-server-bmfg.onrender.com/api/rsvp', {        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault(); // Prevent form submission refresh
+  const payload = { name, email, attending };
+  console.log("Sending payload:", payload); // Debug log
+  try {
+    
+    const response = await fetch(
+      "https://wedding-invitation-server-bmfg.onrender.com/api/rsvp",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
-      });
-      const result = await response.json();
-      setMessage(result.message);
-      if (response.ok) {
-        setName('');
-        setEmail('');
-        setAttending('');
       }
-    } catch (error) {
-      console.error('Submission error:', error);
-      setMessage('Error submitting RSVP. Please try again.');
+    );
+    const result = await response.json();
+    setMessage(result.message);
+    if (response.ok) {
+      setName("");
+      setEmail("");
+      setAttending("");
     }
-  };
+  } catch (error) {
+    console.error("Submission error:", error);
+    setMessage("Error submitting RSVP. Please try again.");
+  }
+};
 
   return (
     <div className="container">
@@ -41,7 +47,7 @@ const response = await fetch('https://wedding-invitation-server-bmfg.onrender.co
         <h2>Counting Down to Our Big Day</h2>
         <div className="countdown">
           <Countdown
-            date={new Date('2025-07-20T18:00:00')}
+            date={new Date("2025-07-20T18:00:00")}
             renderer={({ days, hours, minutes, seconds }) => (
               <>
                 <div>
@@ -92,7 +98,7 @@ const response = await fetch('https://wedding-invitation-server-bmfg.onrender.co
             <option value="yes">Yes, I'll be there!</option>
             <option value="no">Sorry, I can't make it.</option>
           </select>
-          <button type="submit">Submit RSVP</button>
+          <button type="submit"  >Submit RSVP</button>
           {message && <p>{message}</p>}
         </form>
       </section>
