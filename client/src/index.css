@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: #fff5f5; /* Light pink */
+  color: #333;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: url('./assets/floral-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+header {
+  padding: 40px 20px;
+}
+
+header h1 {
+  font-size: 3.5rem;
+  color: #9b2c2c; /* Deep pink */
+  font-weight: 700;
+}
+
+header p {
+  font-size: 1.5rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+.countdown-section {
+  margin: 40px 0;
+}
+
+.countdown-section h2 {
+  font-size: 2rem;
+  color: #b83232; /* Slightly lighter pink */
+  margin-bottom: 20px;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.countdown div {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.countdown .time {
+  font-size: 3rem;
+  color: #333;
+}
+
+.countdown .label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.rsvp-section {
+  max-width: 400px;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 40px;
+}
+
+.rsvp-section h2 {
+  font-size: 2rem;
+  color: #b83232;
+  margin-bottom: 20px;
+}
+
+.rsvp-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.rsvp-section input,
+.rsvp-section select {
+  padding: 12px;
+  border: 1px solid #f0b8b8;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.rsvp-section input:focus,
+.rsvp-section select:focus {
+  outline: none;
+  border-color: #b83232;
+  box-shadow: 0 0 5px rgba(184, 50, 50, 0.3);
+}
+
+.rsvp-section button {
+  padding: 12px;
+  background: #b83232;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.rsvp-section button:hover {
+  background: #9b2c2c;
+}
+
+.rsvp-section p {
+  margin-top: 10px;
+  color: #b83232;
+}
+
+footer {
+  padding-bottom: 40px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  header p {
+    font-size: 1.2rem;
+  }
+
+  .countdown .time {
+    font-size: 2rem;
+  }
+
+  .rsvp-section {
+    width: 90%;
+  }
+}
