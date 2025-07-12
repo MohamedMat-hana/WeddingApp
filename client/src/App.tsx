@@ -12,8 +12,7 @@ function App() {
      const payload = { name, email, attending };
     console.log('Sending payload:', payload); // Debug log
     try {
-      const response = await fetch('http://localhost:5000/api/rsvp', {
-        method: 'POST',
+const response = await fetch('https://wedding-invitation-server-bmfg.onrender.com/api/rsvp', {        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
