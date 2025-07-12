@@ -40,12 +40,12 @@ function App() {
     <Router>
       <div className="container">
         <header>
-          <h1>Omar & Salma</h1>
+          <h1>Mohamed & Rawan</h1>
           <p>Are Getting Married!</p>
-          <p>July 20, 2025 | 6:00 PM | The Floral Venue</p>
-          <nav>
+          <p>AUG 23, 2025 | 9:00 PM | Drem Land</p>
+          {/* <nav>
             <Link to="/">Home</Link> | <Link to="/usersubmit">Submissions</Link>
-          </nav>
+          </nav> */}
         </header>
 
         <Routes>
@@ -57,7 +57,7 @@ function App() {
                   <h2>Counting Down to Our Big Day</h2>
                   <div className="countdown">
                     <Countdown
-                      date={new Date("2025-07-20T18:00:00")}
+                      date={new Date("2025-08-23T21:00:00")}
                       renderer={({ days, hours, minutes, seconds }) => (
                         <>
                           <div>
