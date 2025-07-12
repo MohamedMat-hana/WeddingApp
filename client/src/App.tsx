@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Countdown from "react-countdown";
 import "./index.css";
 
@@ -7,33 +7,52 @@ function App() {
   const [email, setEmail] = useState("");
   const [attending, setAttending] = useState("");
   const [message, setMessage] = useState("");
+  const [submissions, setSubmissions] = useState<any[]>([]); // Store fetched submissions
 
- const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault(); // Prevent form submission refresh
-  const payload = { name, email, attending };
-  console.log("Sending payload:", payload); // Debug log
-  try {
-    
-    const response = await fetch(
-      "https://wedding-invitation-server-bmfg.onrender.com/api/rsvp",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const payload = { name, email, attending };
+    console.log("Sending payload:", payload);
+    try {
+      const response = await fetch(
+        "https://wedding-invitation-server-bmfg.onrender.com/api/rsvp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+      const result = await response.json();
+      setMessage(result.message);
+      if (response.ok) {
+        setName("");
+        setEmail("");
+        setAttending("");
+        fetchSubmissions(); // Refresh submissions after successful post
       }
-    );
-    const result = await response.json();
-    setMessage(result.message);
-    if (response.ok) {
-      setName("");
-      setEmail("");
-      setAttending("");
+    } catch (error) {
+      console.error("Submission error:", error);
+      setMessage("Error submitting RSVP. Please try again.");
     }
-  } catch (error) {
-    console.error("Submission error:", error);
-    setMessage("Error submitting RSVP. Please try again.");
-  }
-};
+  };
+
+  const fetchSubmissions = async () => {
+    try {
+      // Use /usersubmit as a client-side route, mapping to /api/rsvps
+      const response = await fetch(
+        "https://wedding-invitation-server-bmfg.onrender.com/api/rsvps" // Keep backend endpoint
+      );
+      const data = await response.json();
+      setSubmissions(data);
+    } catch (error) {
+      console.error("Error fetching submissions:", error);
+    }
+  };
+
+  // Fetch submissions on component mount
+  useEffect(() => {
+    fetchSubmissions();
+  }, []);
 
   return (
     <div className="container">
@@ -98,9 +117,25 @@ function App() {
             <option value="yes">Yes, I'll be there!</option>
             <option value="no">Sorry, I can't make it.</option>
           </select>
-          <button type="submit"  >Submit RSVP</button>
+          <button type="submit">Submit RSVP</button>
           {message && <p>{message}</p>}
         </form>
+      </section>
+
+      {/* Display Submissions with /usersubmit as a visual label */}
+      <section className="submissions-section">
+        <h2>RSVP Submissions (/usersubmit)</h2>
+        {submissions.length > 0 ? (
+          <ul>
+            {submissions.map((submission, index) => (
+              <li key={index}>
+                {submission.name} ({submission.email}) - {submission.attending}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No submissions yet.</p>
+        )}
       </section>
 
       <footer>
