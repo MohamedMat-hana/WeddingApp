@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Countdown from "react-countdown";
 import "./index.css";
 import SubmissionsPage from "./SubmissionsPage";
@@ -92,7 +92,6 @@ function App() {
       width="50%"
       height="300"
       style={{ border: 0 }}
-      allowFullScreen=""
       loading="lazy"
       referrerPolicy="no-referrer-when-downgrade"
     ></iframe>
