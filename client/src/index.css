@@ -16,102 +16,111 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
   background-image: url('./assets/floral-bg.jpg');
   background-size: cover;
   background-position: center;
+  padding: 10px; /* Small padding for small screens */
 }
 
 header {
-  padding: 40px 20px;
+  padding: 20px;
 }
 
 header h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive font size */
   color: #9b2c2c; /* Deep pink */
   font-weight: 700;
+  word-wrap: break-word;
 }
 
 header p {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
   color: #666;
   margin-top: 10px;
 }
 
+nav {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap; /* Make links wrap on small screens */
+}
+
+nav a {
+  text-decoration: none;
+  color: #b83232;
+  font-weight: 600;
+}
+
 .countdown-section {
-  margin: 40px 0;
+  margin: 30px 0;
 }
 
 .countdown-section h2 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: #b83232; /* Slightly lighter pink */
   margin-bottom: 20px;
 }
 
 .countdown {
   display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
   justify-content: center;
-  gap: 20px;
 }
 
 .countdown div {
   background: white;
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .countdown .time {
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 4vw, 3rem);
   color: #333;
 }
 
 .countdown .label {
-  font-size: 0.9rem;
+  font-size: clamp(0.7rem, 2vw, 1rem);
   color: #666;
+  text-align: center;
+  margin-left: 10px;
 }
 
 .rsvp-section {
+  width: 90%;
   max-width: 400px;
   background: white;
-  padding: 30px;
+  padding: 25px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-bottom: 40px;
+  margin: 30px auto;
 }
 
 .rsvp-section h2 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: #b83232;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .rsvp-section form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .rsvp-section input,
 .rsvp-section select {
-  padding: 12px;
+  padding: 10px;
   border: 1px solid #f0b8b8;
   border-radius: 5px;
   font-size: 1rem;
-  font-family: 'Playfair Display', serif;
-}
-
-.rsvp-section input:focus,
-.rsvp-section select:focus {
-  outline: none;
-  border-color: #b83232;
-  box-shadow: 0 0 5px rgba(184, 50, 50, 0.3);
 }
 
 .rsvp-section button {
-  padding: 12px;
+  padding: 10px;
   background: #b83232;
   color: white;
   border: none;
@@ -131,41 +140,28 @@ header p {
 }
 
 footer {
-  padding-bottom: 40px;
+  padding: 20px;
   color: #666;
+  font-size: 0.9rem;
 }
 
-@media (max-width: 768px) {
-  header h1 {
-    font-size: 2.5rem;
-  }
-
-  header p {
-    font-size: 1.2rem;
-  }
-
-  .countdown .time {
-    font-size: 2rem;
-  }
-
-  .rsvp-section {
-    width: 90%;
-  }
-}
 .modal {
   border: none;
 }
 
 .modal-box {
-  width: 300px;
-  padding: 20px;
+  width: 90%;
+  max-width: 300px;
+  padding: 15px;
   border-radius: 10px;
   background-color: #fff;
 }
 
 .modal-action {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -185,4 +181,81 @@ footer {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+/* ✅ Responsive adjustments */
+@media (max-width: 768px) {
+  .countdown {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  .rsvp-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .countdown div {
+    width: 80px;
+    padding: 10px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .rsvp-section {
+    width: 95%;
+  }
+}
+.location-section {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.location-section h2 {
+  color: #b83232;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 10px;
+}
+
+.map-container {
+  border-radius: 10px;
+  /* overflow: hidden; */
+  margin: 15px 0;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
+}
+
+.map-button {
+  display: inline-block;
+  background: #b83232;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.map-button:hover {
+  background: #9b2c2c;
 }
