@@ -99,15 +99,15 @@ function App() {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
-                    <select
+                  
+                  <input
+                      type="message"
+                      placeholder="message"
                       value={attending}
                       onChange={(e) => setAttending(e.target.value)}
                       required
-                    >
-                      <option value="">Will you attend?</option>
-                      <option value="yes">Yes, I'll be there!</option>
-                      <option value="no">Sorry, I can't make it.</option>
-                    </select>
+                    />
+                
                     <button type="submit">Submit RSVP</button>
                     {message && <p>{message}</p>}
                   </form>
