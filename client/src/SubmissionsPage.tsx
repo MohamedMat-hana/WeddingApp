@@ -46,7 +46,7 @@ const SubmissionsPage = () => {
       </section>
 
       <footer>
-        <p>We can't wait to celebrate with you!</p>
+        <p style={{color:"#9b2c2c"}}>We can't wait to celebrate with you!</p>
       </footer>
     </div>
   );

@@ -79,12 +79,12 @@ nav a {
 
 .countdown .time {
   font-size: clamp(1.5rem, 4vw, 3rem);
-  color: #333;
+  color: #b83232;
 }
 
 .countdown .label {
   font-size: clamp(0.7rem, 2vw, 1rem);
-  color: #666;
+  color: #b83232;
   text-align: center;
   margin-left: 10px;
 }
