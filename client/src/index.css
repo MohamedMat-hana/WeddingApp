@@ -17,7 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-image: url('./assets/floral-bg.jpg');
+  background-image: url("https://images.pexels.com/photos/30934241/pexels-photo-30934241.jpeg?_gl=1*7fqooc*_ga*MTU5OTkxMjc5LjE3NTE4NzQzODc.*_ga_8JE65Q40S6*czE3NTI1ODYzNzgkbzckZzEkdDE3NTI1ODcyNTMkajQwJGwwJGgw");
   background-size: cover;
   background-position: center;
   padding: 10px; /* Small padding for small screens */
@@ -60,35 +60,40 @@ nav a {
 
 .countdown-section h2 {
   font-size: clamp(1.5rem, 4vw, 2rem);
-  color: #b83232; /* Slightly lighter pink */
+  color: #b83232;
   margin-bottom: 20px;
 }
 
+/* Updated countdown styles */
 .countdown {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
+  align-items: center;
+  padding: 0 10px; /* Ensure padding to avoid edge touching */
 }
 
 .countdown div {
   background: white;
   padding: 15px;
   border-radius: 8px;
+  min-width: 70px; /* Ensure units don't get too small */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .countdown .time {
-  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 4vw, 2.5rem); /* Slightly smaller max for mobile */
   color: #b83232;
 }
 
 .countdown .label {
-  font-size: clamp(0.7rem, 2vw, 1rem);
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
   color: #b83232;
   text-align: center;
-  margin-left: 10px;
 }
-
 .rsvp-section {
   width: 90%;
   max-width: 400px;
@@ -185,11 +190,25 @@ footer {
 
 /* ✅ Responsive adjustments */
 @media (max-width: 768px) {
-  .countdown {
+.countdown {
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: center;
+    padding: 0 15px;
   }
 
+  .countdown div {
+    padding: 12px;
+    min-width: 60px;
+  }
+
+  .countdown .time {
+    font-size: clamp(1.2rem, 3.5vw, 2rem);
+  }
+
+  .countdown .label {
+    font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+  }
   header h1 {
     font-size: 2.5rem;
   }
@@ -200,22 +219,29 @@ footer {
 }
 
 @media (max-width: 480px) {
-  nav {
-    flex-direction: column;
-    gap: 10px;
-  }
+ 
 
-  .countdown {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+.countdown {
+    display: flex; /* Revert to flex for better centering */
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
   }
 
   .countdown div {
-    width: 80px;
+    min-width: 40px;
     padding: 10px;
+    border-radius: 6px;
+  }
+  .countdown .time {
+    font-size: clamp(1rem, 3vw, 1.8rem);
   }
 
+  .countdown .label {
+    font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+  }
   header h1 {
     font-size: 2rem;
   }

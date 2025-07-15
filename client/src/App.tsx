@@ -15,22 +15,30 @@ function App() {
     const payload = { name, email, attending };
     console.log("Sending payload:", payload);
     try {
+      console.log("Submitting RSVP...");
       const response = await fetch(
-        "https://wedding-invitation-server-bmfg.onrender.com/api/rsvp",
+        "https://wedding-invitation-server-bmfg.onrender.com/api/rsvp", // Use Render URL
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         }
+        
       );
+      console.log("Submitting RSVsssP...");
+
       const result = await response.json();
       setMessage(result.message);
       if (response.ok) {
         setName("");
+      console.log("Submittsssslsjhing RSVP...");
+
         setEmail("");
         setAttending("");
       }
     } catch (error) {
+      console.log("Submittadsdasing RSVP...");
+
       console.error("Submission error:", error);
       setMessage("Error submitting RSVP. Please try again.");
     }
@@ -45,7 +53,6 @@ function App() {
           <p style={{ color: "#9b2c2c" }}>
             AUG 23, 2025 | 9:00 PM | Dream Land
           </p>
-        
         </header>
 
         <Routes>
@@ -84,9 +91,6 @@ function App() {
 
                 <section className="location-section">
                   <h2>Wedding Location</h2>
-                  <p style={{ color: "#9b2c2c" }}>
-                    قاعة دريم لاند الجابرية - طريق كفر الشيخ
-                  </p>
                   <div className="map-container">
                     <iframe
                       title="Wedding Location"
@@ -110,6 +114,9 @@ function App() {
 
                 <section className="rsvp-section">
                   <h2>RSVP</h2>
+                  <p style={{ color: "#b83232", fontSize: "1rem", marginBottom: "15px" }}>
+                    Please confirm if you’ll join Mohamed & Rawan’s special day and share your heartfelt wishes!
+                  </p>
                   <form onSubmit={handleSubmit}>
                     <input
                       type="text"
@@ -127,13 +134,13 @@ function App() {
                     />
                     <input
                       type="text"
-                      placeholder="Message"
+                      placeholder="Will you attend? (e.g., 'Yes, I’ll celebrate with you!' or 'No, but wishing you joy!')"
                       value={attending}
                       onChange={(e) => setAttending(e.target.value)}
                       required
                     />
                     <button type="submit">Submit RSVP</button>
-                    {message && <p>{message}</p>}
+                    {message && <p style={{ color: "#b83232" }}>{message}</p>}
                   </form>
                 </section>
               </>
