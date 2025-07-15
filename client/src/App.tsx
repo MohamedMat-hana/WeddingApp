@@ -28,6 +28,9 @@ function App() {
       console.log("Submitting RSVsssP...");
 
       const result = await response.json();
+      console.log(result);
+      console.log(email);
+      
       setMessage("You’re on the guest list! 🎉");
       if (response.ok) {
         setName("");
