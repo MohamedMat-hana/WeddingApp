@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./index.css"; 
 
+interface RSVP {
+ name: string;
+ email: string;
+ attending: string;
+ createdAt: string; // لو كنت بتجيب createdAt من API
+}
 const SubmissionsPage = () => {
-  const [submissions, setSubmissions] = useState([]);
+const [submissions, setSubmissions] = useState<RSVP[]>([]);
+const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+ 
   const fetchSubmissions = async () => {
     setLoading(true);
     setError(null);
