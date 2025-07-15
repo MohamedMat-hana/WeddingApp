@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./index.css";
+import "./index.css"; 
 
 const SubmissionsPage = () => {
   const [submissions, setSubmissions] = useState([]);
