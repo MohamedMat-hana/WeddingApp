@@ -45,9 +45,7 @@ function App() {
           <p style={{ color: "#9b2c2c" }}>
             AUG 23, 2025 | 9:00 PM | Dream Land
           </p>
-          <nav>
-            <Link to="/">Home</Link> | <Link to="/usersubmit">Submissions</Link>
-          </nav>
+        
         </header>
 
         <Routes>
