@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Countdown from "react-countdown";
 import "./index.css";
 import SubmissionsPage from "./SubmissionsPage";
