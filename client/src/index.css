@@ -17,7 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-image: url("https://images.pexels.com/photos/30934241/pexels-photo-30934241.jpeg?_gl=1*7fqooc*_ga*MTU5OTkxMjc5LjE3NTE4NzQzODc.*_ga_8JE65Q40S6*czE3NTI1ODYzNzgkbzckZzEkdDE3NTI1ODcyNTMkajQwJGwwJGgw");
+  background-image: url("./assets/floral-bg2.jpg");
   background-size: cover;
   background-position: center;
   padding: 10px; /* Small padding for small screens */

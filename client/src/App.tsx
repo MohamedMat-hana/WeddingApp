@@ -12,7 +12,7 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const payload = { name, email, attending };
+    const payload = { name, email:"emil", attending };
     console.log("Sending payload:", payload);
     try {
       console.log("Submitting RSVP...");
@@ -28,7 +28,7 @@ function App() {
       console.log("Submitting RSVsssP...");
 
       const result = await response.json();
-      setMessage(result.message);
+      setMessage("You’re on the guest list! 🎉");
       if (response.ok) {
         setName("");
       console.log("Submittsssslsjhing RSVP...");
@@ -113,9 +113,9 @@ function App() {
                 </section>
 
                 <section className="rsvp-section">
-                  <h2>RSVP</h2>
+                  <h2>You’re In! ❤️</h2>
                   <p style={{ color: "#b83232", fontSize: "1rem", marginBottom: "15px" }}>
-                    Please confirm if you’ll join Mohamed & Rawan’s special day and share your heartfelt wishes!
+                    we are thrilled to celebrate their big day with you. Thank you for your RSVP! ❤️
                   </p>
                   <form onSubmit={handleSubmit}>
                     <input
@@ -125,13 +125,13 @@ function App() {
                       onChange={(e) => setName(e.target.value)}
                       required
                     />
-                    <input
+                    {/* <input
                       type="email"
                       placeholder="Your Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                    />
+                    /> */}
                     <input
                       type="text"
                       placeholder="Will you attend? (e.g., 'Yes, I’ll celebrate with you!' or 'No, but wishing you joy!')"
@@ -139,7 +139,7 @@ function App() {
                       onChange={(e) => setAttending(e.target.value)}
                       required
                     />
-                    <button type="submit">Submit RSVP</button>
+                    <button type="submit">Submit</button>
                     {message && <p style={{ color: "#b83232" }}>{message}</p>}
                   </form>
                 </section>
