@@ -2,17 +2,17 @@ import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Countdown from "react-countdown";
 import "./index.css";
-import SubmissionsPage from "./SubmissionsPage";
-
+ 
 function App() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [attending, setAttending] = useState("");
+   const [attending, setAttending] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = { name, email:"emil", attending };
+    setLoading(true);
+    const payload = { name, attending };
     console.log("Sending payload:", payload);
     try {
       console.log("Submitting RSVP...");
@@ -23,27 +23,23 @@ function App() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         }
-        
       );
-      console.log("Submitting RSVsssP...");
 
       const result = await response.json();
       console.log(result);
-      console.log(email);
-      
-      setMessage("You’re on the guest list! 🎉");
+ 
       if (response.ok) {
+        setMessage("You’re on the guest list! 🎉");
         setName("");
-      console.log("Submittsssslsjhing RSVP...");
-
-        setEmail("");
-        setAttending("");
+         setAttending("");
+      } else {
+        setMessage("Error submitting RSVP. Please try again.");
       }
     } catch (error) {
-      console.log("Submittadsdasing RSVP...");
-
       console.error("Submission error:", error);
       setMessage("Error submitting RSVP. Please try again.");
+    } finally {
+      setLoading(false); // Set loading to false when submission finishes (success or error)
     }
   };
 
@@ -98,7 +94,7 @@ function App() {
                     <iframe
                       title="Wedding Location"
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3455.02423341193!2d31.0959174752618!3d31.015864174951166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f7a51f6c3ddc6d%3A0x466fa7f23669fe05!2z2YXYrNmF2YjYsdmK2Kk!5e0!3m2!1sar!2seg!4v1710440000000!5m2!1sar!2seg"
-                      width="50%"
+                      width="80%"
                       height="300"
                       style={{ border: 0 }}
                       loading="lazy"
@@ -118,7 +114,7 @@ function App() {
                 <section className="rsvp-section">
                   <h2>You’re In! ❤️</h2>
                   <p style={{ color: "#b83232", fontSize: "1rem", marginBottom: "15px" }}>
-                    we are thrilled to celebrate their big day with you. Thank you for your RSVP! ❤️
+                    fill out the form below to send us nice message! We can't wait to celebrate with you. ❤️
                   </p>
                   <form onSubmit={handleSubmit}>
                     <input
@@ -127,29 +123,40 @@ function App() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
+                      disabled={loading} // Disable input while loading
                     />
-                    {/* <input
-                      type="email"
-                      placeholder="Your Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+               <textarea
+                      placeholder="Your message to us..."
+                      value={attending}
+                      onChange={(e) => setAttending(e.target.value)}
                       required
-                    /> */}
-                    <input
+                      disabled={loading}
+                      className="form-textarea"
+                    />
+                           {/* <input
                       type="text"
                       placeholder="Will you attend? (e.g., 'Yes, I’ll celebrate with you!' or 'No, but wishing you joy!')"
                       value={attending}
                       onChange={(e) => setAttending(e.target.value)}
                       required
-                    />
-                    <button type="submit">Submit</button>
+                      disabled={loading} // Disable input while loading
+                    /> */}
+                    
+                    <button type="submit" disabled={loading}> {/* Disable button while loading */}
+                      {loading ? (
+                        <div className="spinner"></div> // Spinner element
+                      ) : (
+                        "Submit"
+                      )}
+                    </button>
                     {message && <p style={{ color: "#b83232" }}>{message}</p>}
                   </form>
                 </section>
               </>
             }
           />
-          <Route path="/usersubmit" element={<SubmissionsPage />} />
+          {/* If you have a SubmissionsPage component, uncomment the line below */}
+          {/* <Route path="/usersubmit" element={<SubmissionsPage />} /> */}
         </Routes>
 
         <footer>

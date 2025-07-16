@@ -285,3 +285,81 @@ footer {
 .map-button:hover {
   background: #9b2c2c;
 }
+/* Existing styles remain unchanged, updated styles for the button and loading indicator */
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #b83232;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.loading-indicator {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto; /* Center the spinner */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+input, .form-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #f0b8b8; /* Red border color */
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+  transition: border-color 0.3s;
+}
+
+input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: #b83232; /* Maintain red border on focus */
+}
+
+input:disabled, .form-textarea:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+  opacity: 0.7;
+  border-color: #b83232; /* Keep red border when disabled */
+}
+
+/* Specific styles for textarea to support multiple lines and taller height */
+.form-textarea {
+  min-height: 150px; /* Increased height for more lines */
+  resize: vertical; /* Allows vertical resizing only */
+  line-height: 1.5; /* Improves readability for multiple lines */
+}
