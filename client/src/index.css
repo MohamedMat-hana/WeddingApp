@@ -363,3 +363,43 @@ input:disabled, .form-textarea:disabled {
   resize: vertical; /* Allows vertical resizing only */
   line-height: 1.5; /* Improves readability for multiple lines */
 }
+/* SubmissionsPage specific styles */
+.submissions-section table {
+  width: 100%;
+  border-collapse: collapse; /* Merges adjacent borders */
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #fff;
+}
+
+.submissions-section th,
+.submissions-section td {
+  border: 1px solid #ddd; /* Light gray borders */
+  padding: 12px 15px;
+  text-align: left;
+  border-color: #b8323299;
+
+}
+
+.submissions-section th {
+  background-color: #b8323299; /* Light gray background for headers */
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  border-color: #b8323299;
+}
+
+.submissions-section tr:nth-child(even) {
+  background-color: #FFD1DC; /* Zebra striping for readability */
+}
+
+.submissions-section tr:hover {
+  background-color: #e9e9e9; /* Highlight row on hover */
+}
+
+/* Optional: for table responsiveness */
+.table-container {
+  overflow-x: auto; /* Allows horizontal scrolling on small screens */
+  -webkit-overflow-scrolling: touch; /* Improves scrolling on touch devices */
+}

@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./index.css"; 
+import { FaTrash } from "react-icons/fa"; // Import the trash icon
+import "./index.css"; // Assuming your CSS for table styling is here.
 
+// Extend the interface to include the MongoDB _id
 interface RSVP {
- name: string;
- email: string;
- attending: string;
- createdAt: string; // لو كنت بتجيب createdAt من API
+  _id: string; // MongoDB's default ID field
+  name: string;
+  attending: string;
+  createdAt: string;
 }
+
 const SubmissionsPage = () => {
-const [submissions, setSubmissions] = useState<RSVP[]>([]);
-const [error, setError] = useState<string | null>(null);
+  const [submissions, setSubmissions] = useState<RSVP[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
- 
+  const [deletingId, setDeletingId] = useState<string | null>(null); // To track which item is being deleted
+
   const fetchSubmissions = async () => {
     setLoading(true);
     setError(null);
@@ -21,13 +25,14 @@ const [error, setError] = useState<string | null>(null);
         "https://wedding-invitation-server-bmfg.onrender.com/api/rsvps",
         { cache: "no-store" }
       );
+      console.log(response);
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
+      console.log("API Response:", data);
       setSubmissions(data);
-      console.log("data",data);
-      
     } catch (error) {
       console.error("Error fetching submissions:", error);
       setError("Failed to load submissions. Please try again.");
@@ -36,6 +41,36 @@ const [error, setError] = useState<string | null>(null);
     }
   };
 
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this submission?")) {
+      return; // Stop if the user cancels
+    }
+
+    setDeletingId(id); // Set the ID of the item being deleted to show loading state
+    setError(null); // Clear any previous errors
+
+    try {
+      const response = await fetch(`https://wedding-invitation-server-bmfg.onrender.com/api/rsvps/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+      }
+
+      // If successful, filter out the deleted submission from the state
+      setSubmissions(prevSubmissions => prevSubmissions.filter(sub => sub._id !== id));
+      console.log(`Submission with ID ${id} deleted successfully.`);
+    } catch (err) {
+      console.error("Error deleting submission:", err);
+      setError(`Failed to delete submission: ${err instanceof Error ? err.message : String(err)}`);
+    } finally {
+      setDeletingId(null); // Reset deleting ID
+    }
+  };
+
+
   useEffect(() => {
     fetchSubmissions();
   }, []);
@@ -43,7 +78,6 @@ const [error, setError] = useState<string | null>(null);
   return (
     <div className="container">
       <header>
-        <h1>Mohamed & Rawan</h1>
         <nav>
           <Link to="/">Home</Link> | <Link to="/usersubmit">Submissions</Link>
         </nav>
@@ -56,13 +90,52 @@ const [error, setError] = useState<string | null>(null);
         ) : error ? (
           <p style={{ color: "#b83232" }}>{error}</p>
         ) : submissions.length > 0 ? (
-          <ul>
-            {submissions.map((submission, index) => (
-              <li key={index}>
-                <strong>{submission.name}</strong> ({submission.email}) - {submission.attending}
-              </li>
-            ))}
-          </ul>
+          <div className="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Message</th>
+                  <th>Submitted At (Cairo Time)</th>
+                  <th>Actions</th> {/* New column for actions */}
+                </tr>
+              </thead>
+              <tbody>
+                {submissions.map((submission) => (
+                  <tr key={submission._id}> {/* Use _id as key, it's unique */}
+                    <td>{submission.name}</td>
+                    <td>{submission.attending}</td>
+                    <td>
+                      {new Date(submission.createdAt).toLocaleString('en-US', { timeZone: 'Africa/Cairo' })}
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(submission._id)}
+                        disabled={deletingId === submission._id} // Disable button if this item is being deleted
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          cursor: "pointer",
+                          color: "#b83232", // Red color for trash icon
+                          fontSize: "1.2em",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        title="Delete this submission"
+                      >
+                        {deletingId === submission._id ? (
+                          <div className="spinner-small"></div> // Small spinner while deleting
+                        ) : (
+                          <FaTrash />
+                        )}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : (
           <p>No submissions yet.</p>
         )}

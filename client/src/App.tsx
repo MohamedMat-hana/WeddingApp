@@ -1,7 +1,9 @@
+
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Countdown from "react-countdown";
 import "./index.css";
+import SubmissionsPage from "./SubmissionsPage";
  
 function App() {
   const [name, setName] = useState("");
@@ -155,6 +157,8 @@ function App() {
               </>
             }
           />
+                    <Route path="/usersubmit" element={<SubmissionsPage />} />
+
           {/* If you have a SubmissionsPage component, uncomment the line below */}
           {/* <Route path="/usersubmit" element={<SubmissionsPage />} /> */}
         </Routes>
